@@ -1,15 +1,12 @@
 services:
-
   website:
     build: .
     container_name: personal-website
-
     ports:
       - "80:80"
 
   todo:
-  image: ghcr.io/tobykurien/todo:latest
-  container_name: todo-app
-
-  ports:
-    - "3000:80"
+    image: ghcr.io/tobykurien/todo:latest
+    container_name: todo-app
+    ports:
+      - "3000:80"
