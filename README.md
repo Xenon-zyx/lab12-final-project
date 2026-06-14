@@ -4,7 +4,7 @@
 
 Name: Jade
 
-Course: Software Engineering
+Course: Basic Development and Operation
 
 ## Personal Website
 
@@ -16,7 +16,7 @@ This project contains a personal website with:
 
 Access:
 
-http://13.217.21.163
+http://13.216.217.67
 
 ## Todo Application
 
@@ -24,7 +24,7 @@ A TodoMVC-style task management application deployed using Docker Compose.
 
 Access:
 
-http://13.217.21.163:3000
+http://13.216.217.67:3000
 
 Features:
 
@@ -51,7 +51,7 @@ AWS EC2 Ubuntu 26.04
 
 Public IP:
 
-13.217.21.163
+13.216.217.67
 
 ## Technologies Used
 
