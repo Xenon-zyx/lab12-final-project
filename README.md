@@ -4,7 +4,7 @@
 - Nickname: Jade
 - Student ID: 20242181
 - Personal Photo:
-<img src="website/photo.jpg" width="500" alt="My Photo">
+<img src="website/photo.jpg" width="200" alt="My Photo">
 
 ## Project Introduction
 This is the final assignment of Lab 12. We use Docker, Docker Compose and GitHub Actions to implement integrated automatic deployment for a personal introduction website and an open-source Todo application. Both applications are deployed on the same server.
