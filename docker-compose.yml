@@ -6,7 +6,9 @@ services:
       - "80:80"
 
   todo:
-    image: todoapp/todoapp:latest
+    image: nginx:alpine
     container_name: todo-app
     ports:
       - "3000:80"
+    volumes:
+      - ./todo:/usr/share/nginx/html:ro

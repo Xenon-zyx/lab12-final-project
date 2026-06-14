@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoMVC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .todo-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        li.completed span {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>TodoMVC</h1>
+        <input id="todo-input" type="text" placeholder="What needs to be done?" />
+        <ul id="todo-list"></ul>
+        <button id="clear-btn">Clear Completed</button>
+        <div class="footer">
+            Open-source style Todo application inspired by TodoMVC
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('todo-input');
+        const list = document.getElementById('todo-list');
+        const clearBtn = document.getElementById('clear-btn');
+
+        function saveTodos() {
+            const todos = [];
+            list.querySelectorAll('li').forEach(li => {
+                todos.push({
+                    text: li.querySelector('span').textContent,
+                    completed: li.classList.contains('completed')
+                });
+            });
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function loadTodos() {
+            const saved = JSON.parse(localStorage.getItem('todos') || '[]');
+            saved.forEach(todo => addTodo(todo.text, todo.completed));
+        }
+
+        function addTodo(text, completed = false) {
+            const li = document.createElement('li');
+            if (completed) li.classList.add('completed');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = completed;
+
+            const span = document.createElement('span');
+            span.textContent = text;
+
+            checkbox.addEventListener('change', () => {
+                li.classList.toggle('completed', checkbox.checked);
+                saveTodos();
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            list.appendChild(li);
+            saveTodos();
+        }
+
+        input.addEventListener('keypress', e => {
+            if (e.key === 'Enter' && input.value.trim()) {
+                addTodo(input.value.trim());
+                input.value = '';
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            list.querySelectorAll('li.completed').forEach(li => li.remove());
+            saveTodos();
+        });
+
+        loadTodos();
+    </script>
+</body>
+</html>
